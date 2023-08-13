@@ -884,7 +884,15 @@ async function main() {
     const realEstate = await RealEstateContract.deploy();
     await realEstate.deployed();
     console.log("RealEstateContract deployed to:", realEstate.address);
-    verifyContract(realEstate.address)
+    try {
+        await hre.run("verify:verify", {
+            address: realEstate.address,
+            constructorArguments: [], // If your constructor has arguments, pass them here
+        });
+        console.log("Contract verified on Etherscan");
+    } catch (error) {
+        console.error("Error verifying contract:", error);
+    }
 }
 
 

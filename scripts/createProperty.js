@@ -842,7 +842,7 @@ const contractAbi = [
 ];
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-mumbai.g.alchemy.com/v2/rfCruuBJ6-ND7sPx8qfywX0PjKWcmIQq");
 
-const realEstateAddress = "0xeFe7DA2d34847e397c454E309Ab141B58BDB890f"
+const realEstateAddress = "0xE2787192e25E8fA9047b7b0f384eA510D5e40BD6"
 async function verifyContract(contractAddress) {
     try {
         await hre.run("verify:verify", {
@@ -901,5 +901,5 @@ async function readEventLogs(transactionHash) {
         console.error("Error reading event logs:", error);
     }
 }
-main();
-
+// main();
+verifyContract("0x0B3a78cd69d82d3096e47cfAf59256F006D48Cd8")

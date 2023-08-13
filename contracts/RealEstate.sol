@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
-contract SimpleToken is ERC20, Ownable {
+contract ACCToken is ERC20, Ownable {
     uint256 private _totalVested;
     mapping(address => uint256) private _vestedBalances;
     mapping(address => uint256) private _vestingStart;
@@ -339,11 +339,9 @@ contract RealEstateContract is Ownable, Pausable {
         uint256 amount
     );
 
-   function initialize() external{
+    constructor() {
         votingDuration = 7 days; // Default voting duration is 7 days
     }
-
-    
 
     // Function to create and issue a new real estate token representing a specific property
     function createPropertyToken(
@@ -353,7 +351,7 @@ contract RealEstateContract is Ownable, Pausable {
         string memory _tokenName,
         string memory _tokenSymbol,
         address _manager
-    ) public onlyOwner returns(SimpleToken) {
+    ) public onlyOwner {
         require(_totalSupply > 0, "Total supply must be greater than zero");
 
         SimpleToken propertyToken = new SimpleToken(
@@ -381,7 +379,6 @@ contract RealEstateContract is Ownable, Pausable {
             _address,
             address(propertyToken)
         );
-        return propertyToken;
     }
 
     // Function to list the real estate tokens on a decentralized marketplace for sale
